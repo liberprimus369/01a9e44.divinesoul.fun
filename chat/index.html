@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"
+    />
+    <title>Divine Soul Chat</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "");
+      fbq("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=&ev=PageView&noscript=1"
+      />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "hg8euloebu");
+    </script>
+
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ece5dd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .chat-container {
+        width: 100%;
+        max-width: 700px;
+        height: 80vh;
+        background: #fff;
+        border-radius: 0px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .chat-header {
+        background: #075e54;
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .chat-header img {
+        width: 40px;
+        height: auto;
+        border-radius: 50%;
+      }
+      .chat-header h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .chat-body {
+        flex: 1;
+        padding: 20px;
+        background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png")
+          repeat;
+        overflow-y: auto;
+      }
+      .message {
+        margin: 10px 0;
+        padding: 8px 12px 22px 12px;
+        border-radius: 7.5px;
+        max-width: 70%;
+        width: fit-content;
+        position: relative;
+        font-size: 14px;
+        line-height: 1.4;
+        min-width: 50px;
+      }
+      .bot-message {
+        background: #fff;
+        margin-right: 50px;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        white-space: pre-wrap;
+      }
+      .user-message {
+        background: #dcf8c6;
+        margin-left: auto;
+        margin-right: 10px;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+      }
+      .typing-indicator {
+        background: #fff;
+        margin-right: 50px;
+        padding: 8px 12px;
+        border-radius: 7.5px;
+        max-width: 70%;
+        width: fit-content;
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+      }
+      .message-time {
+        font-size: 11px;
+        color: #666;
+        position: absolute;
+        bottom: 5px;
+        right: 8px;
+      }
+      .options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        justify-content: flex-end;
+      }
+      .option-btn {
+        background: #075e54;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        min-width: 100px;
+      }
+      .option-btn:hover {
+        background: #044841;
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .card-img {
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .card-img:hover {
+        opacity: 0.8;
+      }
+      .image-message {
+        max-width: 270px;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+      .chat-footer {
+        background: #f0f0f0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .chat-footer input {
+        flex: 1;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 20px;
+        background: white;
+        font-size: 14px;
+        outline: none;
+      }
+      .chat-footer input:disabled {
+        background: #e0e0e0;
+      }
+      .send-btn {
+        background: #25d366;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        display: none;
+      }
+      .send-btn:hover {
+        background: #25d366;
+      }
+      .send-btn.visible {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="h-10 w-10 rounded-full bg-white">
+          <img
+            src="https://sacredchant.site/step-vsl/img/padre.png"
+            class="h-full w-full"
+            alt="Bot Avatar"
+          />
+        </div>
+        <div class="leading-tight">
+          <h2>Rasmus | Divine Soul Chat</h2>
+          <small class="text-gray-300 text-xs"><i>Online</i></small>
+        </div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <!-- Messages will be appended here -->
+      </div>
+      <div class="chat-footer" id="chatFooter">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type a message..."
+          disabled
+        />
+        <button id="sendButton" class="send-btn">
+          <svg
+            style="transform: scale(1.8)"
+            viewBox="0 0 28 28"
+            class="w-4 h-4 fill-white"
+          >
+            <path
+              d="M9.166 7.5a.714.714 0 0 0-.998.83l1.152 4.304a.571.571 0 0 0 .47.418l5.649.807c.163.023.163.26 0 .283l-5.648.806a.572.572 0 0 0-.47.418l-1.153 4.307a.714.714 0 0 0 .998.83l12.284-5.857a.715.715 0 0 0 0-1.29L9.166 7.5Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const chatBody = document.getElementById("chatBody");
+      const userInput = document.getElementById("userInput");
+      const sendButton = document.getElementById("sendButton");
+
+      // Placeholder data
+      window.chat_location = "Paris";
+
+      (async (w) => {
+        const endpoint = `json`;
+        const url = `https://wtfismyip.com/${endpoint}`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+        w.chat_location = data.YourFuckingCity;
+      })(window);
+
+      // Chatbot conversation flow configuration
+      const chatbotFlow = [
+        {
+          id: "welcome",
+          message: "Happy that you’re here, I’ve been waiting for you! 🔮",
+          options: [],
+          next: "introduce",
+        },
+        {
+          id: "introduce",
+          message:
+            "My name is Rasmus, and in the next minute, I’ll have the answers you’re looking for about your love life...",
+          options: [],
+          next: "askName",
+        },
+        {
+          id: "askName",
+          message: "What is your name?",
+          options: [],
+          next: "greetName",
+          enableInput: true,
+        },
+        {
+          id: "greetName",
+          message: (name) =>
+            `It’s a pleasure to talk to you ${name}, I’m excited to start your reading!`,
+          options: [],
+          next: "explain",
+        },
+        {
+          id: "explain",
+          message: "I’ll explain how it works...",
+          options: [],
+          next: "process",
+        },
+        {
+          id: "process",
+          message:
+            "First, I'll ask you some questions to find out who is your Guardian Angel, then I'll make a prayer for him, and he will be able to show me your divine soul",
+          options: [],
+          next: "confirm",
+        },
+        {
+          id: "confirm",
+          message: "Ok?",
+          options: [{ text: "Ok", next: "start" }],
+          next: "start",
+        },
+        {
+          id: "start",
+          message: "So, let's start",
+          options: [],
+          next: "askGender",
+        },
+        {
+          id: "askGender",
+          message: (name) => `${name}, which gender attracts you?`,
+          options: [
+            { text: "I like men", next: "askBirthday" },
+            { text: "I like women", next: "askBirthday" },
+            { text: "I like both", next: "askBirthday" },
+          ],
+          next: "askBirthday",
+        },
+        {
+          id: "askBirthday",
+          message: "I see... and when is your birthday?",
+          options: [],
+          enableInput: true,
+          next: "birthdayConfirm",
+        },
+        {
+          id: "birthdayConfirm",
+          message: "Ok",
+          options: [],
+          next: "chooseCard",
+        },
+        {
+          id: "chooseCard",
+          message: "So now, please choose 1 card:",
+          cards: [
+            "img/carta-1.webp",
+            "img/carta-2.webp",
+            "img/carta-3.webp",
+            "img/carta-4.webp",
+            "img/carta-5.webp",
+          ],
+          next: "revealAngel",
+        },
+        {
+          id: "revealAngel",
+          message:
+            "Interesting... Your Guardian Angel is Saint Michael the Archangel!",
+          image: "img/anjo.jpg",
+          options: [],
+          next: "visionStart",
+        },
+        {
+          id: "visionStart",
+          message: (name) =>
+            `${name}, I’m already starting to see some things...`,
+          options: [],
+          next: "twinFlame",
+        },
+        {
+          id: "twinFlame",
+          message: (name) => {
+            const city = window.chat_location;
+            return `Your divine soul is located in ${city}, have you ever been there?`;
+          },
+          options: [
+            { text: "Yes", next: "seeFace" },
+            { text: "No", next: "seeFace" },
+          ],
+          next: "seeFace",
+        },
+        {
+          id: "seeFace",
+          message: "I just saw a face, and it’s so beautiful...",
+          options: [],
+          next: "announceAppearance",
+        },
+        {
+          id: "announceAppearance",
+          message:
+            "Get ready, because they’ll appear in your life in a few days...",
+          options: [],
+          next: "offerDrawing",
+        },
+        {
+          id: "offerDrawing",
+          message:
+            "I can make a drawing of the face I’m visualizing if you want",
+          options: [],
+          next: "drawingAccuracy",
+        },
+        {
+          id: "drawingAccuracy",
+          message:
+            "My drawing has up to 98% accuracy... Many people get emotional when they receive it...",
+          options: [],
+          next: "showTestimonials",
+        },
+        {
+          id: "showTestimonials",
+          message:
+            "See the testimonials from 3 of the thousands of clients who received a drawing identical to their partner...",
+          images: ["img/dep-1.webp", "img/dep-2.webp", "img/dep-3.webp"],
+          options: [],
+          next: "requestDrawing",
+        },
+        {
+          id: "requestDrawing",
+          message: "Can I start your drawing?",
+          options: [{ text: "Yes", next: "paymentIntro" }],
+          next: "paymentIntro",
+        },
+        {
+          id: "paymentIntro",
+          message: (name) => `${name}, pay close attention!`,
+          options: [],
+          next: "paymentDetails",
+        },
+        {
+          id: "paymentDetails",
+          message: "I’m not charging anything for the drawings...",
+          options: [],
+          next: "paymentRequest",
+        },
+        {
+          id: "paymentRequest",
+          message:
+            "I just ask for the costs of the materials used while making your drawing, which is around 10 dollars.",
+          options: [],
+          next: "paymentAssurance",
+        },
+        {
+          id: "paymentAssurance",
+          message: "This is all I ask",
+          options: [],
+          next: "offerReading",
+        },
+        {
+          id: "offerReading",
+          message:
+            "And to help you even more... I’ll give you a complete reading about your divine soul for free",
+          options: [],
+          next: "readingDetails",
+        },
+        {
+          id: "readingDetails",
+          message: `You’ll receive a complete and personalized PDF: <br>
+❤️‍🔥 How much do your divine soul truly loves you?<br>
+❤️‍🔥 Are someone cheating on you or on your divine soul?<br>
+❤️‍🔥 The desires that divine soul really wants to do but doesn’t tell anyone (and how to make them happen)!<br>
+❤️‍🔥 A simple trick to stay on your divine soul’s mind when you’re apart!<br>
+❤️‍🔥 The ONE thing that will keep your relationship strong in the long term!<br>
+❤️‍🔥 How to make your divine soul see YOU as the most important woman of the universe!<br>
+❤️‍🔥 Why do some people act strange and pull away? You’ll be shocked, {{nome}}...`,
+          options: [],
+          next: "paymentLink",
+        },
+        {
+          id: "paymentLink",
+          message:
+            "I’ll send you a 100% secure payment page where you can fill in your details and make the payment!",
+          options: [
+            {
+              text: "🔗 GO TO SECURE CHECKOUT >",
+              next: null,
+              redirect: "https://google.com",
+            },
+          ],
+          next: null,
+        },
+      ];
+
+      // Function to get current time in WhatsApp format
+      function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      // Function to display typing indicator
+      function displayTypingIndicator() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "typing-indicator";
+        typingDiv.textContent = "Typing...";
+        typingDiv.id = "typingIndicator";
+        chatBody.appendChild(typingDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        return typingDiv;
+      }
+
+      // Function to remove typing indicator
+      function removeTypingIndicator() {
+        const typingDiv = document.getElementById("typingIndicator");
+        if (typingDiv) {
+          typingDiv.remove();
+        }
+      }
+
+      // Function to handle sending a message
+      async function sendMessage() {
+        if (userInput.value.trim()) {
+          const userMessage = userInput.value.trim();
+          displayMessage(userMessage, false);
+          userInput.value = "";
+          userInput.disabled = true;
+          sendButton.classList.remove("visible");
+          if (chatbotFlow.currentStep.id === "askName") {
+            chatbotFlow.userName = userMessage;
+            await proceedToNextStep();
+          } else if (chatbotFlow.currentStep.id === "askBirthday") {
+            chatbotFlow.birthday = userMessage;
+            await proceedToNextStep();
+          }
+        }
+      }
+
+      // Function to display a message
+      async function displayMessage(message, isBot = true) {
+        if (isBot) {
+          const typingDiv = displayTypingIndicator();
+          console.log(message.length);
+          const delay = Math.min(Math.floor(message.length * 20) + 500, 30000); // Random delay between 1-3 seconds
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          removeTypingIndicator();
+        }
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${
+          isBot ? "bot-message" : "user-message"
+        }`;
+        messageDiv.innerHTML = message;
+        const timeSpan = document.createElement("span");
+        timeSpan.className = "message-time";
+        timeSpan.textContent = getCurrentTime();
+        messageDiv.appendChild(timeSpan);
+        chatBody.appendChild(messageDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      // Function to display options
+      async function displayOptions(options, currentStep) {
+        const typingDiv = displayTypingIndicator();
+        const delay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        removeTypingIndicator();
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        options.forEach((option) => {
+          const button = document.createElement("button");
+          button.className = "option-btn";
+          button.textContent = option.text;
+          button.onclick = () => {
+            displayMessage(option.text, false);
+            optionsDiv.remove();
+            if (option.redirect) {
+              var tk = new URL(document.location).searchParams.get("tk");
+              var utm_source = new URL(document.location).searchParams.get(
+                "utm_source"
+              );
+              const userData = {
+                userName: chatbotFlow.userName || "",
+                genderPreference: chatbotFlow.genderPreference || "",
+                birthday: chatbotFlow.birthday || "",
+                location: window.chat_location || "Paris",
+              };
+              window.location.href =
+                option.redirect +
+                "?tk=" +
+                tk +
+                "&utm_source=" +
+                utm_source +
+                "&user_name=" +
+                userData.userName +
+                "&gender_preference=" +
+                userData.genderPreference +
+                "&birthday=" +
+                userData.birthday +
+                "&location=" +
+                userData.location;
+            } else if (currentStep.id === "askGender") {
+              chatbotFlow.genderPreference = option.text;
+              proceedToNextStep(option.next);
+            } else {
+              proceedToNextStep(option.next);
+            }
+          };
+          optionsDiv.appendChild(button);
+        });
+        chatBody.appendChild(optionsDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      // Function to display cards
+      async function displayCards(cards, nextStep) {
+        const typingDiv = displayTypingIndicator();
+        const delay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        removeTypingIndicator();
+        const cardDiv = document.createElement("div");
+        cardDiv.className = "card-container";
+        cards.forEach((card) => {
+          const img = document.createElement("img");
+          img.src = card;
+          img.className = "card-img";
+          img.onclick = () => {
+            displayMessage("Card selected", false);
+            cardDiv.remove();
+            proceedToNextStep(nextStep);
+          };
+          cardDiv.appendChild(img);
+        });
+        chatBody.appendChild(cardDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      // Function to display images
+      async function displayImages(images) {
+        const typingDiv = displayTypingIndicator();
+        const delay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        removeTypingIndicator();
+        images.forEach((image) => {
+          const img = document.createElement("img");
+          img.src = image;
+          img.className = "image-message";
+          chatBody.appendChild(img);
+        });
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      // Function to proceed to the next step
+      async function proceedToNextStep(nextStepId = null) {
+        const currentIndex = chatbotFlow.findIndex(
+          (step) => step.id === chatbotFlow.currentStep.id
+        );
+        const nextIndex = nextStepId
+          ? chatbotFlow.findIndex((step) => step.id === nextStepId)
+          : currentIndex + 1;
+        if (nextIndex < chatbotFlow.length) {
+          const step = chatbotFlow[nextIndex];
+          chatbotFlow.currentStep = step;
+          const message =
+            typeof step.message === "function"
+              ? step.message(chatbotFlow.userName || "Friend")
+              : step.message.replace(
+                  "{{nome}}",
+                  chatbotFlow.userName || "Friend"
+                );
+          await displayMessage(message);
+          if (step.options && step.options.length > 0) {
+            await displayOptions(step.options, step);
+          } else if (step.cards) {
+            await displayCards(step.cards, step.next);
+          } else if (step.image) {
+            await displayImages([step.image]);
+            await proceedToNextStep();
+          } else if (step.images) {
+            await displayImages(step.images);
+            await proceedToNextStep();
+          } else if (step.enableInput) {
+            userInput.disabled = false;
+            sendButton.classList.add("visible");
+            userInput.focus();
+            userInput.onkeydown = async (e) => {
+              if (e.key === "Enter") {
+                await sendMessage();
+              }
+            };
+            sendButton.onclick = sendMessage;
+          } else {
+            await proceedToNextStep();
+          }
+        }
+      }
+
+      // Start the chatbot
+      chatbotFlow.currentStep = chatbotFlow[0];
+      proceedToNextStep();
+    </script>
+  </body>
+</html>
