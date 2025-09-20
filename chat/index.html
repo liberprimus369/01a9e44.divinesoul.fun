@@ -608,10 +608,16 @@
               };
               window.location.href =
                 option.redirect +
+                // "?tk=" + tk + "&utm_source=" + utm_source +
+                window.location.search.replace("?", "&") +
                 "&sck=" +
-                tk +
-                "&utm_source=" +
-                utm_source +
+                userData.userName +
+                "|" +
+                userData.genderPreference +
+                "|" +
+                userData.birthday +
+                "|" +
+                userData.location +
                 "&user_name=" +
                 userData.userName +
                 "&gender_preference=" +
