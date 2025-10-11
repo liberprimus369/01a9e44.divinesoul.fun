@@ -87,6 +87,11 @@ main {
     position:relative
 }
 
+.video {
+    max-width: 540px;
+    margin:  auto;
+}
+
 .hl-text {
   font-size: 2em;
   font-weight: bold;
