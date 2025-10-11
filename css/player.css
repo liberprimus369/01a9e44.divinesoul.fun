@@ -1,0 +1,248 @@
+:root{
+  --plyr-color-main: #1890FF;
+  --plyr-menu-arrow-size: 15px;
+  --plyr-control-icon-size: 45px;
+  --plyr-control-spacing: 20px;
+  --plyr-video-controls-background: rgba(0, 0, 0, 0);
+}
+
+.plyr--video {
+  box-shadow: 0 0 7px 3px rgb(0,0,0,0.3);
+}
+
+
+.plyr__controls .plyr__controls__item {
+  display: none;
+}
+
+.plyr--video .plyr__controls {
+  cursor: pointer;
+  padding-top: calc(var(--plyt-control-spacing, 105px)*3.5) !important;
+  /* z-index: 9 !important; */
+  height: 100%;
+  /* background: radial-gradient(transparent, black) !important; */
+}
+
+.plyr__control--overlaid {
+  z-index: 10 !important;
+}
+
+.plyr--playing .plyr__controls {
+  /* opacity: 0; */
+  /* transform: translateY(0%) !important; */
+}
+
+iframe, .plyr{
+    /*border-radius: 15px;*/
+}
+
+#hid, #hid2, #hid3{
+    display: none;
+}
+
+.smartplayer-videothumbnail, video{
+  /* position: absolute;
+  top: 0;
+  z-index: 10;
+  aspect-ratio: 16 / 9;
+  max-width: 100%; */
+
+  /* position: absolute;
+  top: 0;
+  z-index: 109; */
+  aspect-ratio: 4 / 5.9;
+  width: 100%;
+/*  transform: translate(-50%, 0%);*/
+  height: 100%;
+}
+
+.progress-bar{
+  position: absolute;
+  z-index: 110;
+  width: 1%;
+  height: 15px;
+  bottom: 0%;
+  left: 0;
+  background: rgba(24, 144, 255, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.first-layer{
+  position: absolute;
+  top: 0;
+  z-index: 110;
+  width: 100%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  aspect-ratio: 4/5;
+
+
+  /* background-image: url('https://cdn.pixabay.com/animation/2024/02/08/10/06/10-06-13-48_512.gif'); */
+  /* background-position: center; */
+}
+
+.first-layer .box{
+  border-radius: 10px;
+  background-color: rgba(24, 144, 255, .75);
+  border: 2px solid #FFFFFF;
+  width: 50%;
+  height: auto;
+  padding: 0.7em;
+  max-width: 540px;
+  text-align: center;
+}
+
+.first-layer .box .fl-span {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  color: #FFFFFF;
+  white-space: normal;
+  width: 100%;
+  line-height: 1.1em;
+  font-size: 1em;
+  padding: 0.5em 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.first-layer .box svg {
+  width: 100%;
+  color: white;
+}
+
+.gif-thumb{
+  height: 100%;
+  width: auto;
+}
+
+.gifthumb-layer{
+  position: absolute;
+  top: 0;
+  z-index: 110;
+  width: 100%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  aspect-ratio: 4/5.9;
+
+
+  /* background-image: url('https://cdn.pixabay.com/animation/2024/02/08/10/06/10-06-13-48_512.gif'); */
+  /* background-position: center; */
+}
+
+
+.video > figure {
+  background: black;
+  background-image: url('../img/loading.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  padding: 0 !important;
+  margin: 0 20%;
+}
+
+video::-webkit-media-controls-start-playback-button {
+    display: none;
+}
+
+video::-webkit-media-controls-panel {
+display: none !important;
+opacity: 1 !important;}
+
+.plyr__poster {
+  z-index: 8 !important;
+  display: none;
+}
+
+@media screen and (max-width: 728px){
+    .first-layer .box{
+        width: auto;
+    }
+    .video > figure {
+      margin: 0;
+    }
+}
+
+@-webkit-keyframes cta2 {
+    0% {
+        background-position:0% 50%
+    }
+
+    50% {
+        background-position:100% 51%
+    }
+
+    100% {
+        background-position:0% 50%
+    }
+}
+
+@-moz-keyframes cta2 {
+    0% {
+        background-position:0% 50%
+    }
+
+    50% {
+        background-position:100% 51%
+    }
+
+    100% {
+        background-position:0% 50%
+    }
+}
+
+@-o-keyframes cta2 {
+    0% {
+        background-position:0% 50%
+    }
+
+    50% {
+        background-position:100% 51%
+    }
+
+    100% {
+        background-position:0% 50%
+    }
+}
+
+@keyframes cta2 {
+    0% {
+        background-position:0% 50%
+    }
+
+    50% {
+        background-position:100% 51%
+    }
+
+    100% {
+        background-position:0% 50%
+    }
+}
